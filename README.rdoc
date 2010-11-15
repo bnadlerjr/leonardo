@@ -1,0 +1,15 @@
+= Leonardo
+A graphing library built on Raphael.js
+
+== Description
+Not much to see here yet, still very pre-alpha. Planning implementing *very*
+basic charts following the philosophy in the book Information Dashboard Design
+[1] by Stephen Few.
+
+API is too unstable for official docs, so see the comments in the source which
+I try to keep up to date.
+
+Note that I'm using some ECMAScript 5 functions (notably Array.forEach) so you
+may need https://github.com/kriskowal/es5-shim if your using an older browser.
+
+[1] http://www.amazon.com/Information-Dashboard-Design-Effective-Communication/dp/0596100167/ref=sr_1_1?s=books&ie=UTF8&qid=1289799351&sr=1-1
