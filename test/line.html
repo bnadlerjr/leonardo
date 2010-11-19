@@ -5,12 +5,14 @@
     </head>
     <body>
         <div id="line-chart"></div>
+        <div id="sparkline"></div>
         <script>
             var labels = ['foo', 'bar', 'baz'];
             var series = [
                 { name: 'Type1', values: [25, 50, 100] }
             ];
             Leonardo.lineChart('line-chart', series, labels);
+            Leonardo.sparkline('sparkline', [26, 59, 109, 22, 77, 25, 131]);
         </script>
     </body>
 </html>
