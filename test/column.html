@@ -4,13 +4,21 @@
         <script src="../lib/leonardo.js"></script>
     </head>
     <body>
+        <h2>Single Series Column Chart</h2>
         <div id="column-chart"></div>
+        <h2>Multiple Series Column Chart</h2>
+        <div id="series-column-chart"></div>
         <script>
-            var labels = ['foo', 'bar', 'baz'];
-            var series = {
-                'Type1': [60, 30, 90]
-            };
-            Leonardo.columnChart('column-chart', series, labels);
+            var labels = ['foo', 'bar', 'baz'],
+                singleSeries = {
+                    'Type1': [60, 30, 90]
+                },
+                multipleSeries = {
+                    'Type 1': [60, 30, 90],
+                    'Type 2': [45, 70, 85]
+                };
+            Leonardo.columnChart('column-chart', singleSeries, labels);
+            Leonardo.columnChart('series-column-chart', multipleSeries, labels);
         </script>
     </body>
 </html>
