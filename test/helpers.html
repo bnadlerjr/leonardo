@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="../vendor/raphael-min.js"></script>
+        <script src="../lib/leonardo.js"></script>
+    </head>
+    <body>
+        <h2>Get Palette Color Test</h2>
+        <div id="get-palette-color"></div>
+        <h2>Get Palette Color Reset</h2>
+        <div id="get-palette-color-reset"></div>
+        <script>
+            var size = 20,
+                width = size * 16,
+                height = size,
+                palettePaper = new Raphael('get-palette-color', width, height),
+                paletteReset = new Raphael('get-palette-color-reset', width, height);
+
+            function drawBoxes(paper, numBoxes, x) {
+                var x = x || 0;
+
+                while (numBoxes--) {
+                    paper.rect(x, 0, size, size).attr({
+                        fill: Raphael.leonardo.getPaletteColor()});
+
+                    x += size;
+                }
+            }
+                    
+            drawBoxes(palettePaper, 16);
+            paletteReset.rect(0, 0, size, size).attr({
+                fill: Raphael.leonardo.getPaletteColor({reset: true})});
+
+            drawBoxes(paletteReset, 15, size);
+        </script>
+    </body>
+</html>
