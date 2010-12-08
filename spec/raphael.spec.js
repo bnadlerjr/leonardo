@@ -4,7 +4,7 @@
 describe("Raphael.leonardo.getPaletteColor", function () {
     function compareColors(expectedColors) {
         expectedColors.forEach(function (value) {
-            expect(value).toEqual(Raphael.leonardo.getPaletteColor());
+            expect(Raphael.leonardo.getPaletteColor()).toEqual(value);
         });
     }
 
@@ -29,7 +29,7 @@ describe("Raphael.leonardo.getPaletteColor", function () {
     });
 
     it("should not return a color if the reset option is given", function () {
-        expect(true).toEqual(Raphael.leonardo.getPaletteColor({reset: true}));
+        expect(Raphael.leonardo.getPaletteColor({reset: true})).toEqual(true);
     });
 
     it("should reset the color cycle if the reset option is given", function () {
@@ -58,9 +58,8 @@ describe("Raphael.fn.leonardo", function () {
             paper.leonardo.hLine(2, 2, 5);
 
             var points = paper.top.attrs.path;
-            expect(2).toEqual(points.length);
-            expect(['M', 2, 2]).toEqual(points[0]);
-            expect(['H', 7]).toEqual(points[1]);
+            expect(points[0]).toEqual(['M', 2, 2]);
+            expect(points[1]).toEqual(['H', 7]);
         });
     });
 
@@ -69,9 +68,8 @@ describe("Raphael.fn.leonardo", function () {
             paper.leonardo.vLine(1, 1, 6);
 
             var points = paper.top.attrs.path;
-            expect(2).toEqual(points.length);
-            expect(['M', 1, 1]).toEqual(points[0]);
-            expect(['V', 7]).toEqual(points[1]);
+            expect(points[0]).toEqual(['M', 1, 1]);
+            expect(points[1]).toEqual(['V', 7]);
         });
     });
 
@@ -80,9 +78,8 @@ describe("Raphael.fn.leonardo", function () {
             paper.leonardo.line(1, 1, 5, 5);
 
             var points = paper.top.attrs.path;
-            expect(2).toEqual(points.length);
-            expect(['M', 1, 1]).toEqual(points[0]);
-            expect(['L', 5, 5]).toEqual(points[1]);
+            expect(points[0]).toEqual(['M', 1, 1]);
+            expect(points[1]).toEqual(['L', 5, 5]);
         });
     });
 
@@ -90,8 +87,8 @@ describe("Raphael.fn.leonardo", function () {
         it("should cache the first call", function () {
             paper.leonardo.lineTo(1, 1);
 
-            expect(1).toEqual(paper.cache.lastX);
-            expect(1).toEqual(paper.cache.lastY);
+            expect(paper.cache.lastX).toEqual(1);
+            expect(paper.cache.lastY).toEqual(1);
         });
 
         it("should return a line path based on previous points", function () {
@@ -102,11 +99,11 @@ describe("Raphael.fn.leonardo", function () {
             var line1Points = paper.top.attrs.path,
                 line2Points = paper.top.prev.attrs.path;
 
-            expect(['M', 5, 5]).toEqual(line1Points[0]);
-            expect(['L', 8, 4]).toEqual(line1Points[1]);
+            expect(line1Points[0]).toEqual(['M', 5, 5]);
+            expect(line1Points[1]).toEqual(['L', 8, 4]);
 
-            expect(['M', 1, 1]).toEqual(line2Points[0]);
-            expect(['L', 5, 5]).toEqual(line2Points[1]);
+            expect(line2Points[0]).toEqual(['M', 1, 1]);
+            expect(line2Points[1]).toEqual(['L', 5, 5]);
         });
     });
 });
