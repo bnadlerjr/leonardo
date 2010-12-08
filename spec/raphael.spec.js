@@ -42,3 +42,71 @@ describe("Raphael.leonardo.getPaletteColor", function () {
         compareColors(expectedColors);
     });
 });
+
+/**
+ * Raphael canvas helper specs.
+ */
+describe("Raphael.fn.leonardo", function () {
+    var paper;
+
+    beforeEach(function () {
+        paper = new Raphael(0, 0, 10, 10);
+    });
+
+    describe("hLine", function () {
+        it("should return a horizontal path", function () {
+            paper.leonardo.hLine(2, 2, 5);
+
+            var points = paper.top.attrs.path;
+            expect(2).toEqual(points.length);
+            expect(['M', 2, 2]).toEqual(points[0]);
+            expect(['H', 7]).toEqual(points[1]);
+        });
+    });
+
+    describe("vLine", function () {
+        it("should return a vertical path", function () {
+            paper.leonardo.vLine(1, 1, 6);
+
+            var points = paper.top.attrs.path;
+            expect(2).toEqual(points.length);
+            expect(['M', 1, 1]).toEqual(points[0]);
+            expect(['V', 7]).toEqual(points[1]);
+        });
+    });
+
+    describe("line", function () {
+        it("should return a line path", function () {
+            paper.leonardo.line(1, 1, 5, 5);
+
+            var points = paper.top.attrs.path;
+            expect(2).toEqual(points.length);
+            expect(['M', 1, 1]).toEqual(points[0]);
+            expect(['L', 5, 5]).toEqual(points[1]);
+        });
+    });
+
+    describe("lineTo", function () {
+        it("should cache the first call", function () {
+            paper.leonardo.lineTo(1, 1);
+
+            expect(1).toEqual(paper.cache.lastX);
+            expect(1).toEqual(paper.cache.lastY);
+        });
+
+        it("should return a line path based on previous points", function () {
+            paper.leonardo.lineTo(1, 1);
+            paper.leonardo.lineTo(5, 5);
+            paper.leonardo.lineTo(8, 4);
+
+            var line1Points = paper.top.attrs.path,
+                line2Points = paper.top.prev.attrs.path;
+
+            expect(['M', 5, 5]).toEqual(line1Points[0]);
+            expect(['L', 8, 4]).toEqual(line1Points[1]);
+
+            expect(['M', 1, 1]).toEqual(line2Points[0]);
+            expect(['L', 5, 5]).toEqual(line2Points[1]);
+        });
+    });
+});
