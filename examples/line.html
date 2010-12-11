@@ -7,11 +7,14 @@
         <div id="line-chart"></div>
         <div id="sparkline"></div>
         <script>
-            var labels = ['foo', 'bar', 'baz'];
-            var series = {
-                'Type1': [25, 50, 100]
-            };
-            Leonardo.lineChart('line-chart', series, labels);
+            var singleSeries = { "Type 1": [3, 8, 5, 6, 7, 4, 9, 2] },
+                multipleSeries = {
+                    "Type 1": [3, 8, 5, 6, 7, 4, 9, 2],
+                    "Type 2": [2, 9, 4, 7, 6, 5, 8, 3]
+                },
+                labels = ['Foo', 'Bar', 'Baz', "Qux", "Quux", "Corge", "Grault", "Garply"];
+
+            Leonardo.lineChart('line-chart', singleSeries, labels);
             Leonardo.sparkline('sparkline', [26, 59, 0, 109, 22, 77, 0, 0, 25, 131]);
         </script>
     </body>
