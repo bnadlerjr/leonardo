@@ -2,76 +2,61 @@
  * Leonardo Specs
  */
 describe("Leonardo", function () {
-    /**
-     * Searches array-like obj for predicate.
-     */
-    function find(obj, predicate) {
-        var i = 0,
-            found = false,
-            length = obj.length;
+    var graph,
+        singleSeries = { "Type 1": [3, 8, 5, 6, 7, 4, 9, 2] },
+        labels = ['Foo', 'Bar', 'Baz', "Qux", "Quux", "Corge", "Grault", "Garply"];
 
-        while ((!(found)) && (i < length)) {
-            if (obj.hasOwnProperty(i)) {
-                found = predicate(obj[i]);
-            }
+    describe("columnChart", function () {
+        describe("single series with default options", function () {
+            beforeEach(function () {
+                setFixtures(sandbox());
+                Leonardo.columnChart("sandbox", singleSeries, labels);
+                graph = document.getElementById("sandbox").firstChild;
+            });
 
-            i += 1;
-        }
+            it("should draw the graph in the specified DOM ID", function () {
+                expect(document.getElementById("sandbox")).toContain("svg");
+            });
 
-        return found;
-    }
+            it("should draw a graph with a rectangle for each data point", function () {
+                expect(graph).toHaveSVGRectangle({x:43.74999999999999, y:123.33333333333334, w:6, h:56.66666666666666});
+                expect(graph).toHaveSVGRectangle({x:75.25, y:28.888888888888886, w:6, h:151.11111111111111});
+                expect(graph).toHaveSVGRectangle({x:106.75, y:85.55555555555556, w:6, h:94.44444444444444});
+                expect(graph).toHaveSVGRectangle({x:138.25, y:66.66666666666667, w:6, h:113.33333333333333});
+                expect(graph).toHaveSVGRectangle({x:169.75, y:47.77777777777777, w:6, h:132.22222222222223});
+                expect(graph).toHaveSVGRectangle({x:201.25, y:104.44444444444444, w:6, h:75.55555555555556});
+                expect(graph).toHaveSVGRectangle({x:232.75, y:10, w:6, h:170});
+                expect(graph).toHaveSVGRectangle({x:264.25, y:142.22222222222223, w:6, h:37.77777777777777});
+            });
 
-    var graph;
+            it("should draw the x-axis", function () {
+                expect(graph).toHaveSVGPath("M37.99999999999999,180H290");
+            });
 
-    beforeEach(function() {
-        this.addMatchers({
-            toHaveSVGPath: function(expected) {
-                var paths = this.actual.getElementsByTagName("path");
-
-                return find(paths, function (value) {
-                    if (value.attributes) {
-                        if (value.attributes.d.value === expected) {
-                            return true;
-                        }
-                    }
+            it("should draw the x-axis labels", function () {
+                labels.forEach(function (value) {
+                    expect(graph).toHaveSVGText(value);
                 });
-            },
+            });
 
-            toHaveSVGText: function(expected) {
-                var textNodes = this.actual.getElementsByTagName("text");
+            it("should draw the y-axis", function () {
+                expect(graph).toHaveSVGPath("M37.99999999999999,10V180");
+            });
 
-                return find(textNodes, function (value) {
-                    if (value.firstChild) {
-                        if (value.firstChild.textContent === expected) {
-                            return true;
-                        }
-                    }
+            it("should draw the y-axis scale values", function () {
+                ['0', '2', '4', '5', '7', '9'].forEach(function (value) {
+                    expect(graph).toHaveSVGText(value);
                 });
-            },
+            });
 
-            toHaveSVGRectangle: function(expected) {
-                var rects = this.actual.getElementsByTagName("rect");
-
-                return find(rects, function(rect) {
-                    if (rect.x.baseVal.value === expected.x &&
-                        rect.y.baseVal.value === expected.y &&
-                        rect.width.baseVal.value === expected.w &&
-                        rect.height.baseVal.value === expected.h) {
-                        return true;
-                    }
-                });
-            }
+            it("should draw the graph with the default size", function () {
+                expect(graph).toHaveAttr("width", 300);
+                expect(graph).toHaveAttr("height", 200);
+            });
         });
     });
 
     describe("lineChart", function () {
-        var singleSeries = { "Type 1": [3, 8, 5, 6, 7, 4, 9, 2] },
-            multipleSeries = {
-                "Type 1": [3, 8, 5, 6, 7, 4, 9, 2],
-                "Type 2": [2, 9, 4, 7, 6, 5, 8, 3]
-            },
-            labels = ['Foo', 'Bar', 'Baz', "Qux", "Quux", "Corge", "Grault", "Garply"];
-
         describe("single series with default options", function () {
             beforeEach(function () {
                 setFixtures(sandbox());
