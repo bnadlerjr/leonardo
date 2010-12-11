@@ -47,6 +47,19 @@ describe("Leonardo", function () {
                         }
                     }
                 });
+            },
+
+            toHaveSVGRectangle: function(expected) {
+                var rects = this.actual.getElementsByTagName("rect");
+
+                return find(rects, function(rect) {
+                    if (rect.x.baseVal.value === expected.x &&
+                        rect.y.baseVal.value === expected.y &&
+                        rect.width.baseVal.value === expected.w &&
+                        rect.height.baseVal.value === expected.h) {
+                        return true;
+                    }
+                });
             }
         });
     });
@@ -103,6 +116,27 @@ describe("Leonardo", function () {
             it("should draw the graph with the default size", function () {
                 expect(graph).toHaveAttr("width", 300);
                 expect(graph).toHaveAttr("height", 200);
+            });
+        });
+
+        describe("single series with user defined options", function () {
+            beforeEach(function () {
+                setFixtures(sandbox());
+                Leonardo.lineChart("sandbox", singleSeries, labels, {
+                    width: 100,
+                    height: 50,
+                    drawBorder: true
+                });
+                graph = document.getElementById("sandbox").firstChild;
+            });
+
+            it("should draw the graph with the specified size", function () {
+                expect(graph).toHaveAttr("width", 100);
+                expect(graph).toHaveAttr("height", 50);
+            });
+
+            it("should draw the graph with a border", function () {
+                expect(graph).toHaveSVGRectangle({x:0, y:0, w:100, h:50});
             });
         });
     });
