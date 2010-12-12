@@ -54,6 +54,27 @@ describe("Leonardo", function () {
                 expect(graph).toHaveAttr("height", 200);
             });
         });
+
+        describe("single series with user defined options", function () {
+            beforeEach(function () {
+                setFixtures(sandbox());
+                Leonardo.columnChart("sandbox", singleSeries, labels, {
+                    width: 100,
+                    height: 50,
+                    drawBorder: true
+                });
+                graph = document.getElementById("sandbox").firstChild;
+            });
+
+            it("should draw the graph with the specified size", function () {
+                expect(graph).toHaveAttr("width", 100);
+                expect(graph).toHaveAttr("height", 50);
+            });
+
+            it("should draw the graph with a border", function () {
+                expect(graph).toHaveSVGRectangle({x:0, y:0, w:100, h:50});
+            });
+        });
     });
 
     describe("lineChart", function () {
