@@ -19,14 +19,14 @@ describe("Leonardo", function () {
             });
 
             it("should draw a graph with a rectangle for each data point", function () {
-                expect(graph).toHaveSVGRectangle({x:43.74999999999999, y:123.33333333333334, w:6, h:56.66666666666666});
-                expect(graph).toHaveSVGRectangle({x:75.25, y:28.888888888888886, w:6, h:151.11111111111111});
-                expect(graph).toHaveSVGRectangle({x:106.75, y:85.55555555555556, w:6, h:94.44444444444444});
-                expect(graph).toHaveSVGRectangle({x:138.25, y:66.66666666666667, w:6, h:113.33333333333333});
-                expect(graph).toHaveSVGRectangle({x:169.75, y:47.77777777777777, w:6, h:132.22222222222223});
-                expect(graph).toHaveSVGRectangle({x:201.25, y:104.44444444444444, w:6, h:75.55555555555556});
-                expect(graph).toHaveSVGRectangle({x:232.75, y:10, w:6, h:170});
-                expect(graph).toHaveSVGRectangle({x:264.25, y:142.22222222222223, w:6, h:37.77777777777777});
+                expect(graph).toHaveSVGRectangle({x: 43.75, y:123.33, w:6.00, h: 56.67});
+                expect(graph).toHaveSVGRectangle({x: 75.25, y: 28.89, w:6.00, h:151.11});
+                expect(graph).toHaveSVGRectangle({x:106.75, y: 85.56, w:6.00, h: 94.44});
+                expect(graph).toHaveSVGRectangle({x:138.25, y: 66.67, w:6.00, h:113.33});
+                expect(graph).toHaveSVGRectangle({x:169.75, y: 47.78, w:6.00, h:132.22});
+                expect(graph).toHaveSVGRectangle({x:201.25, y:104.44, w:6.00, h: 75.56});
+                expect(graph).toHaveSVGRectangle({x:232.75, y: 10.00, w:6.00, h:170.00});
+                expect(graph).toHaveSVGRectangle({x:264.25, y:142.22, w:6.00, h: 37.78});
             });
 
             it("should draw the x-axis", function () {
@@ -69,13 +69,13 @@ describe("Leonardo", function () {
             });
 
             it("should draw a graph with a path for each data point", function () {
-                expect(graph).toHaveSVGPath("M46.74999999999999,123.33333333333334L78.25,28.888888888888886");
-                expect(graph).toHaveSVGPath("M78.25,28.888888888888886L109.75,85.55555555555556");
-                expect(graph).toHaveSVGPath("M109.75,85.55555555555556L141.25,66.66666666666667");
-                expect(graph).toHaveSVGPath("M141.25,66.66666666666667L172.75,47.77777777777777");
-                expect(graph).toHaveSVGPath("M172.75,47.77777777777777L204.25,104.44444444444444");
-                expect(graph).toHaveSVGPath("M204.25,104.44444444444444L235.75,10");
-                expect(graph).toHaveSVGPath("M235.75,10L267.25,142.22222222222223");
+                expect(graph).toHaveSVGPath("M46.75,123.33L78.25,28.89");
+                expect(graph).toHaveSVGPath("M78.25,28.89L109.75,85.56");
+                expect(graph).toHaveSVGPath("M109.75,85.56L141.25,66.67");
+                expect(graph).toHaveSVGPath("M141.25,66.67L172.75,47.78");
+                expect(graph).toHaveSVGPath("M172.75,47.78L204.25,104.44");
+                expect(graph).toHaveSVGPath("M204.25,104.44L235.75,10");
+                expect(graph).toHaveSVGPath("M235.75,10L267.25,142.22");
             });
 
             it("should draw the x-axis", function () {
