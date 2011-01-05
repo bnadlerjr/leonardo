@@ -4,6 +4,12 @@
 describe("Leonardo", function () {
     var graph,
         singleSeries = { "Type 1": [3, 8, 5, 6, 7, 4, 9, 2] },
+
+        multipleSeries = { "Type 1": [1, 3, 5, 7, 9, 11, 13, 15],
+                           "Type 2": [2, 4, 6, 8, 10, 12, 14, 16],
+                           "Type 3": [10, 13, 15, 17, 19, 21, 23, 25],
+                           "Type 4": [12, 14, 16, 18, 20, 22, 24, 26] },
+
         labels = ['Foo', 'Bar', 'Baz', "Qux", "Quux", "Corge", "Grault", "Garply"];
 
     describe("columnChart", function () {
@@ -52,6 +58,23 @@ describe("Leonardo", function () {
             it("should draw the graph with the default size", function () {
                 expect(graph).toHaveAttr("width", 300);
                 expect(graph).toHaveAttr("height", 200);
+            });
+        });
+
+        describe("multiple series with default options", function () {
+            beforeEach(function () {
+                setFixtures(sandbox());
+                Leonardo.columnChart("sandbox", multipleSeries, labels);
+                graph = document.getElementById("sandbox").firstChild;
+            });
+
+            it("should draw a graph with a rectangle for each data point", function () {
+                // No need to check for all 32 rectangles, just a sampling
+                expect(graph).toHaveSVGRectangle({x: 38.00, y:173.46, w:6.00, h:  6.54});
+                expect(graph).toHaveSVGRectangle({x: 75.50, y:153.85, w:6.00, h: 26.15});
+                expect(graph).toHaveSVGRectangle({x:138.50, y:127.69, w:6.00, h: 52.31});
+                expect(graph).toHaveSVGRectangle({x:233.00, y: 88.46, w:6.00, h: 91.54});
+                expect(graph).toHaveSVGRectangle({x: 81.50, y: 95.00, w:6.00, h: 85.00});
             });
         });
 

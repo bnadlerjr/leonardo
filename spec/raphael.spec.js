@@ -28,6 +28,16 @@ describe("Raphael.leonardo.getPaletteColor", function () {
         ]);
     });
 
+    it("starts the cycle at the specified index if the startIndex option is given", function () {
+        var expectedColors = [
+                "rgb(43, 87, 169)", "rgb(236, 125, 43)", "rgb(102, 38, 145)",
+                "rgb(156, 25, 37)", "rgb(175, 50, 148)"
+            ];
+
+        expect(Raphael.leonardo.getPaletteColor({startIndex: 1})).toEqual("rgb(32, 141, 70)");
+        compareColors(expectedColors);
+    });
+
     it("should not return a color if the reset option is given", function () {
         expect(Raphael.leonardo.getPaletteColor({reset: true})).toEqual(true);
     });
