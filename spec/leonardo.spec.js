@@ -223,7 +223,8 @@ describe("Leonardo", function () {
                     width:          100,
                     height:         30,
                     fillColor:      "#333333",
-                    showPercentage: true
+                    showPercentage: true,
+                    textColor:      "#999999"
                 });
                 graph = document.getElementById("sandbox").firstChild;
                 bar = graph.getElementsByTagName('rect')[0];
@@ -242,6 +243,11 @@ describe("Leonardo", function () {
                 var text = graph.getElementsByTagName("text")[0];
                 expect(text).toHaveAttr("text-anchor", "start");
                 expect(text.firstChild).toHaveText("25%");
+            });
+
+            it("draws the text with the specified color", function () {
+                var text = graph.getElementsByTagName("text")[0];
+                expect(text).toHaveAttr("stroke", "#999999");
             });
         });
     });
